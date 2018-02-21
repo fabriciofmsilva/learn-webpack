@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --config ./webpack/webpack.config.js"
+    "start": "webpack-dev-server --config ./webpack/webpack.config.js",
+    "build": "webpack --config ./webpack/webpack.config.js"
   },
   "author": "Fabrício Silva <fabriciofmsilva@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "html-webpack-plugin": "^2.30.1",
-    "webpack": "^3.11.0"
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
     "lodash": "^4.17.5"

@@ -1,19 +1,25 @@
+const path = require('path');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const package = require('../package.json');
 
 module.exports = {
   entry: {
+    vendor: Object.keys(package.dependencies),
     app: './src/scripts/app.js',
-    settings: './src/scripts/settings.js',
-    vendor: Object.keys(package.dependencies)
+    settings: './src/scripts/settings.js'
   },
   output: {
-    filename: './dist/[name].bundle.js'
+    path: path.join(__dirname, '../dist/'),
+    filename: '[name].bundle.js'
   },
   watch: true,
   resolve: {
     extensions: ['.js', '.ts']
+  },
+  devServer: {
+    contentBase: path.join(__dirname, '../dist/'),
+    port: 9007
   },
   plugins: [
     new CommonsChunkPlugin({
@@ -24,20 +30,22 @@ module.exports = {
       minChunks: 2
     }),
     new HtmlWebpackPlugin({
-      chunks: ['vendor', 'app', 'shared'],
       hash: true,
-      filename: './dist/index.html',
+      title: 'My Awesome application',
+      myPageHeader: 'Hello World',
       template: './src/index.html',
-      tilte: 'My Awewome Application',
-      myPageHeader: 'Hello World'
+      chunks: ['vendor', 'shared', 'app'],
+      path: path.join(__dirname, "../dist/"),
+      filename: 'index.html' 
     }),
     new HtmlWebpackPlugin({
-      chunks: ['vendor', 'settings', 'shared'],
       hash: true,
-      filename: './dist/settings.html',
+      title: 'My Awesome application',
+      myPageHeader: 'Settings',
       template: './src/index.html',
-      tilte: 'My Awewome Application',
-      myPageHeader: 'Settings'
+      chunks: ['vendor', 'shared', 'settings'],
+      path: path.join(__dirname, "../dist/"),
+      filename: 'settings.html'
     })
   ]
 };
