@@ -1,5 +1,6 @@
 const path = require('path');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const package = require('../package.json');
 
@@ -13,13 +14,26 @@ module.exports = {
     path: path.join(__dirname, '../dist/'),
     filename: '[name].bundle.js'
   },
-  watch: true,
+  module: {
+    rules: [
+      {
+        test: /\.(s*)css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'sass-loader'
+          ]
+        })
+      }
+    ]
+  },
   resolve: {
     extensions: ['.js', '.ts']
   },
   devServer: {
     contentBase: path.join(__dirname, '../dist/'),
-    port: 9007
+    port: 9000
   },
   plugins: [
     new CommonsChunkPlugin({
@@ -28,6 +42,9 @@ module.exports = {
     new CommonsChunkPlugin({
       name: 'shared',
       minChunks: 2
+    }),
+    new ExtractTextPlugin({
+      filename: 'app.bundle.css'
     }),
     new HtmlWebpackPlugin({
       hash: true,
