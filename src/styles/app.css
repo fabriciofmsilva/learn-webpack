@@ -2,3 +2,11 @@ div {
   background-color:#99cc00;
   padding:10px;
 }
+
+.settingIcon{
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('./../images/settings.png');
+  background-repeat: no-repeat;
+}

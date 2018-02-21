@@ -25,6 +25,17 @@ module.exports = {
             'sass-loader'
           ]
         })
+      },
+      {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            // Convert images < 8kb to base64 strings
+            limit: 8000,
+            name: 'images/[hash]-[name].[ext]'
+          }
+        }]
       }
     ]
   },
