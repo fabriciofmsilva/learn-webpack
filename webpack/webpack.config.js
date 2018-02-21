@@ -5,6 +5,7 @@ module.exports = {
     output: {
         filename: './dist/app.bundle.js'
     },
+    watch: true,
     plugins: [
         new HtmlWebpackPlugin({
             hash: true,

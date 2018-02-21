@@ -67,7 +67,8 @@
 /* 0 */
 /***/ (function(module, exports) {
 
-console.log('Welcome from app.js');
+console.log('Welcome! Greetings from app.js. Let\'s learn Webpack2');
+
 
 /***/ })
 /******/ ]);
