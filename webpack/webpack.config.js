@@ -1,5 +1,6 @@
 const path = require('path');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const package = require('../package.json');
@@ -54,6 +55,12 @@ module.exports = {
       name: 'shared',
       minChunks: 2
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'src/images',
+        to: 'images'
+      } 
+    ]), 
     new ExtractTextPlugin({
       filename: 'app.bundle.css'
     }),
