@@ -1,8 +1,17 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    // path relative to this file
     entry: './src/scripts/app.js',
     output: {
-        // path relative to this file
         filename: './dist/app.bundle.js'
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            hash: true,
+            filename: './dist/index.html',
+            template: './src/index.html',
+            tilte: 'My Awewome Application',
+            myPageHeader: 'Hello World'
+        })
+    ]
 };
